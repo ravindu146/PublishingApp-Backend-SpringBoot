@@ -41,9 +41,12 @@ public class PostController {
 
         if (existingUser.isPresent()) {
             Post post = new Post(
+                    userId,
                     postDTO.getTopic(),
                     postDTO.getContent(),
-                    userId);
+                    postDTO.getStartDate(),
+                    postDTO.getEndDate()
+                    );
 
             int postId = postService.savePost(post);
 
