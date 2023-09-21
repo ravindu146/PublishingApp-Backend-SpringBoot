@@ -84,7 +84,10 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
 
         return ResponseEntity.ok(response);
     } else {
-        return ResponseEntity.notFound().build();
+        HashMap<String, String> errorResponse  = new HashMap<>();
+        errorResponse .put("message", "Data Did not Update Successfully");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 }
     
