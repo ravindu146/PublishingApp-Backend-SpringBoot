@@ -26,5 +26,10 @@ public class PostIMPL implements PostService {
     @Override
     public ArrayList<Post> getPostsByUserId(int userId){
         return postRepo.findByUserId(userId);
+    }
+
+    @Override
+    public Optional<Post> getPostById(int postId) {
+        return postRepo.findById(postId);
     }  
 }

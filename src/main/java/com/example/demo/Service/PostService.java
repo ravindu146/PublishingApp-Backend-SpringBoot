@@ -12,5 +12,7 @@ public interface PostService {
     // Optional<Post> getPostById(int postId);
 
     public ArrayList<Post> getPostsByUserId(int userId);
+
+    public Optional<Post> getPostById(int postId);
     
 }

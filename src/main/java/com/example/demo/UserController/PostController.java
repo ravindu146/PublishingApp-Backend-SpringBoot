@@ -74,4 +74,16 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getPostById/{postId}")
+    public ResponseEntity<?> getPostById(@PathVariable int postId){
+        Optional<Post> existingPost = postService.getPostById(postId);
+
+        if(existingPost.isPresent()){
+            return ResponseEntity.ok(existingPost.get());
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }  
+    }
 }
