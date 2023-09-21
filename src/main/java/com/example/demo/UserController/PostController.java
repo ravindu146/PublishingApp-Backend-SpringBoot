@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +64,31 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
+
+    @PutMapping("/update")
+public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostDTO postDTO) {
+    Optional<Post> existingPost = postService.getPostById(postId);
+
+    if (existingPost.isPresent()) {
+        Post postToUpdate = existingPost.get();
+
+        postToUpdate.setTopic(postDTO.getTopic());
+        postToUpdate.setContent(postDTO.getContent());
+        postToUpdate.setStartDate(postDTO.getStartDate());
+        postToUpdate.setEndDate(postDTO.getEndDate());
+
+        postService.updatePost(postToUpdate);
+
+        HashMap<String, String> response = new HashMap<>();
+        response.put("message", "Data Updated Successfully");
+
+        return ResponseEntity.ok(response);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+    
+
 
     @GetMapping("/user/{userId}/posts")
     public ResponseEntity<ArrayList<Post>> getPostsByUserId(@PathVariable int userId){

@@ -31,5 +31,10 @@ public class PostIMPL implements PostService {
     @Override
     public Optional<Post> getPostById(int postId) {
         return postRepo.findById(postId);
+    }
+
+    @Override
+    public void updatePost(Post post) {
+        postRepo.save(post);
     }  
 }
