@@ -12,26 +12,29 @@
         private String content;
         private LocalDate startDate;
         private LocalDate endDate;
+        private String imageName;
 
         public PostDTO() {
         }
 
 
-        public PostDTO(int userId, int postId, String topic, String content, LocalDate startDate, LocalDate endDate) {
+        public PostDTO(int userId, int postId, String topic, String content, LocalDate startDate, LocalDate endDate, String imageName) {
             this.userId = userId;
             this.postId = postId;
             this.topic = topic;
             this.content = content;
             this.startDate = startDate;
             this.endDate = endDate;
+            this.imageName = imageName;
         }
 
-        public PostDTO(int userId, String topic, String content, LocalDate startDate, LocalDate endDate) {
+        public PostDTO(int userId, String topic, String content, LocalDate startDate, LocalDate endDate, String imageName) {
             this.userId = userId;
             this.topic = topic;
             this.content = content;
             this.startDate = startDate;
             this.endDate = endDate;
+            this.imageName = imageName;
         }
 
         public int getUserId() {
@@ -82,6 +85,13 @@
             this.endDate = endDate;
         }
 
+        public String getImageName() {
+            return this.imageName;
+        }
+
+        public void setImageName(String imageName) {
+            this.imageName = imageName;
+        }
 
         @Override
         public String toString() {
@@ -92,7 +102,7 @@
                 ", content='" + getContent() + "'" +
                 ", startDate='" + getStartDate() + "'" +
                 ", endDate='" + getEndDate() + "'" +
+                ", imageName='" + getImageName() + "'" +
                 "}";
         }
-
-    }
+ }

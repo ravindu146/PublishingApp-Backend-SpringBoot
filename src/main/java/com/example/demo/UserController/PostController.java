@@ -46,7 +46,8 @@ public class PostController {
                     postDTO.getTopic(),
                     postDTO.getContent(),
                     postDTO.getStartDate(),
-                    postDTO.getEndDate()
+                    postDTO.getEndDate(),
+                    postDTO.getImageName()
                     );
 
             int postId = postService.savePost(post);

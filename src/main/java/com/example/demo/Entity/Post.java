@@ -32,25 +32,30 @@ public class Post {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "imageName")
+    private String imageName;
+
     public Post() {
     }
 
 
-    public Post(int postId, int userId, String topic, String content, LocalDate startDate, LocalDate endDate) {
+    public Post(int postId, int userId, String topic, String content, LocalDate startDate, LocalDate endDate, String imageName) {
         this.postId = postId;
         this.userId = userId;
         this.topic = topic;
         this.content = content;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageName = imageName;
     }
 
-    public Post( int userId, String topic, String content, LocalDate startDate, LocalDate endDate) {
+    public Post( int userId, String topic, String content, LocalDate startDate, LocalDate endDate, String imageName) {
         this.userId = userId;
         this.topic = topic;
         this.content = content;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageName = imageName;
     }
 
 
@@ -102,6 +107,15 @@ public class Post {
         this.endDate = endDate;
     }
 
+    public String getImageName() {
+        return this.imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+
     @Override
     public String toString() {
         return "{" +
@@ -111,6 +125,9 @@ public class Post {
             ", userId='" + getUserId() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
+            ", imageName='" + getImageName() + "'" +
             "}";
     }
+
+    
 }
