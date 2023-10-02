@@ -36,5 +36,10 @@ public class PostIMPL implements PostService {
     @Override
     public void updatePost(Post post) {
         postRepo.save(post);
+    }
+
+    @Override
+    public ArrayList<Post> getAllPosts() {
+        return (ArrayList<Post>)postRepo.findAll();
     }  
 }

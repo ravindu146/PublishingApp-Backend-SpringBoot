@@ -137,5 +137,17 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
         }
 
     }
+
+    @GetMapping("/getAllPosts")
+    public ResponseEntity<ArrayList<Post>> getAllPosts(){
+        ArrayList<Post> allPosts = postService.getAllPosts();
+        
+        if(!allPosts.isEmpty()){
+            return ResponseEntity.ok(allPosts);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
     
 }

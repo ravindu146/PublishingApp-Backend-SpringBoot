@@ -16,5 +16,7 @@ public interface PostService {
     public Optional<Post> getPostById(int postId);
 
     public void updatePost(Post post);
+
+    public ArrayList<Post> getAllPosts();
     
 }
