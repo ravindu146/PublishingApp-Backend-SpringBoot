@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.hibernate.mapping.List;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,6 +38,9 @@ public class PostController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private  ResourceLoader resourceLoader;
 
     @PostMapping("/save")
     public ResponseEntity<HashMap<String, String>> savePost(@RequestParam int userId, @RequestBody PostDTO postDTO) {
@@ -116,4 +122,19 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
             return ResponseEntity.notFound().build();
         }  
     }
+
+    @GetMapping("/image/{imageName}")
+    public ResponseEntity<Resource> getImageByPost(@PathVariable String imageName){
+        
+        Resource imagResource = resourceLoader.getResource("file:uploads/"+ imageName);
+        
+        if(imagResource.exists()){
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagResource);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+    
 }
