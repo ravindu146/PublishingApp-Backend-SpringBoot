@@ -83,6 +83,7 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
         postToUpdate.setContent(postDTO.getContent());
         postToUpdate.setStartDate(postDTO.getStartDate());
         postToUpdate.setEndDate(postDTO.getEndDate());
+        postToUpdate.setImageName(postDTO.getImageName());
 
         postService.updatePost(postToUpdate);
 
@@ -127,7 +128,7 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
     public ResponseEntity<Resource> getImageByPost(@PathVariable String imageName){
         
         Resource imagResource = resourceLoader.getResource("file:uploads/"+ imageName);
-        
+
         if(imagResource.exists()){
             return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagResource);
         }
