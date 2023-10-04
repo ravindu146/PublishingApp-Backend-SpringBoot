@@ -13,6 +13,7 @@ import com.example.demo.Entity.User;
 import com.example.demo.Repo.UserRepo;
 import com.example.demo.Response.LoginResponse;
 import com.example.demo.Service.UserService;
+import com.example.demo.Service.JwtService;
 
 @Service
 public class UserIMPL implements UserService {
@@ -20,8 +21,8 @@ public class UserIMPL implements UserService {
     @Autowired
     private UserRepo userRepo;
 
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtService jwtService;
 
     @Override
     public String addUser(UserDTO userDTO) {
@@ -43,19 +44,22 @@ public class UserIMPL implements UserService {
 
     @Override
     public LoginResponse loginUser(LoginDTO loginDTO) {
-        String msg = "";
         User user1 = userRepo.findByEmail(loginDTO.getEmail());
         if (user1 != null) {
             String password = loginDTO.getPassword();
             String savedPassword = user1.getPassword();
             int userId = user1.getUserId();
+            String email = user1.getEmail();
 
             Boolean isPwdRight = password.equals(savedPassword);
 
             if (isPwdRight) {
+                String userIdInString =String.valueOf(user1.getUserId());
+                String name = user1.getName();
+                String authToken = this.jwtService.generateToken(userIdInString);
                 Optional<User> user = userRepo.findOneByEmailAndPassword(loginDTO.getEmail(), savedPassword);
                 if (user.isPresent()) {
-                    return new LoginResponse("Login Success", true , userId);
+                    return new LoginResponse("Login Success", true, authToken, userId, name , email);
                 } else {
                     return new LoginResponse("Login Failed", false);
                 }
