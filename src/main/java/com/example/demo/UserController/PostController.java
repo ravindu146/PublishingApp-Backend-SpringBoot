@@ -104,12 +104,7 @@ public ResponseEntity<?> updatePost(@RequestParam int postId, @RequestBody PostD
     @GetMapping("/user/{userId}/posts")
     public ResponseEntity<ArrayList<Post>> getPostsByUserId(@PathVariable int userId){
         ArrayList<Post> userPosts = postService.getPostsByUserId(userId);
-
-        if(!userPosts.isEmpty()){
-            return ResponseEntity.ok(userPosts);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(userPosts);
     }
 
     @GetMapping("/getPostById/{postId}")
